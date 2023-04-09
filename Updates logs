@@ -1,1 +1,76 @@
+Tasks made on 4/09/2023 >>>> 
+
+1 - Quitar X del Formulario:
+  Archivos modificados>>>>
+         Module3, frm_ContactList, UserForm1
+
+  Module3 code added>>>>
+        Option Explicit
+        Private Declare PtrSafe Function FindWindow Lib "user32" Alias "FindWindowA" (ByVal lpClassName As String, ByVal lpWindowName As String) As Long
+        Private Declare PtrSafe Function GetWindowLong Lib "user32" Alias "GetWindowLongA" (ByVal hwnd As Long, ByVal nIndex As Long) As Long
+        Private Declare PtrSafe Function SetWindowLong Lib "user32" Alias "SetWindowLongA" (ByVal hwnd As Long, ByVal nIndex As Long, ByVal dwNewLong As Long) As Long
+        Private Declare PtrSafe Function SendMessage Lib "user32" Alias "SendMessageA" (ByVal hwnd As Long, ByVal wMsg As Long, ByVal wParam As Long, lParam As Any) As Long
+        Const GWL_WNDPROC = (-4)
+        Const GWL_HINSTANCE = (-6)
+        Const GWL_HWNDPARENT = (-8)
+        Const GWL_STYLE = (-16)
+        Const GWL_EXSTYLE = (-20)
+        Const GWL_USERDATA = (-21)
+        Const GWL_ID = (-12)
+        Const WS_OVERLAPPED = &H0&
+        Const WS_POPUP = &H80000000
+        Const WS_CHILD = &H40000000
+        Const WS_MINIMIZE = &H20000000
+        Const WS_VISIBLE = &H10000000
+        Const WS_DISABLED = &H8000000
+        Const WS_CLIPSIBLINGS = &H4000000
+        Const WS_CLIPCHILDREN = &H2000000
+        Const WS_MAXIMIZE = &H1000000
+        Const WS_CAPTION = &HC00000
+        Const WS_BORDER = &H800000
+        Const WS_DLGFRAME = &H400000
+        Const WS_VSCROLL = &H200000
+        Const WS_HSCROLL = &H100000
+        Const WS_SYSMENU = &H80000
+        Const WS_THICKFRAME = &H40000
+        Const WS_GROUP = &H20000
+        Const WS_TABSTOP = &H10000
+        Const WS_MINIMIZEBOX = &H20000
+        Const WS_MAXIMIZEBOX = &H10000
+
+        Const WS_TILED = WS_OVERLAPPED
+        Const WS_ICONIC = WS_MINIMIZE
+        Const WS_SIZEBOX = WS_THICKFRAME
+        Const WS_OVERLAPPEDWINDOW = (WS_OVERLAPPED Or WS_CAPTION Or WS_SYSMENU Or WS_THICKFRAME Or WS_MINIMIZEBOX Or WS_MAXIMIZEBOX)
+        Const WS_TILEDWINDOW = WS_OVERLAPPEDWINDOW
+        Sub QuitabotonX(ByRef NombreForm As String)
+            Dim hwnd As Long, hMenu As Long, lStyle As Long
+            hwnd = FindWindow("ThunderDFrame", NombreForm)
+            lStyle = GetWindowLong(hwnd, GWL_STYLE)
+            lStyle = lStyle And Not WS_SYSMENU
+            SetWindowLong hwnd, GWL_STYLE, lStyle
+        End Sub
+
+#######################################################################################################################################################
+
+frm_ContactList code added>>>>
+        Option Explicit
+
+        Private Sub UserForm_Initialize()
+        Call QuitabotonX(Me.Caption)
+        Me.StartUpPosition = 2
+        End Sub
+        
+ 2 - Centrar la aplicacion al centro de la pantalla
+    Archivos modificados>>>>
+        frm_ContactList, UserForm1
+        
+    frm_ContactList code added>>>>
+          Me.StartUpPosition = 2
+      
+      UserForm1 code added>>>>
+          Me.StartUpPosition = 2
+**********************************************************************************************************************************************************
+**********************************************************************************************************************************************************
+**********************************************************************************************************************************************************
 
